@@ -9,7 +9,8 @@ const Navbar = () => {
       <div className="navbar bg-base-100">
         <div className="navbar-start">
           <Link to={"/"} className="flex items-center gap-2">
-            <img className="w-10 mt-1" src={logo} />
+            <div className="border-4 border-purple-700 border-dotted animate-spin w-14 h-14 rounded-full"></div>
+            <img className="w-10   absolute ml-2" src={logo} />
             <h1 className="text-4xl font-bold">Pulse Cafe</h1>
           </Link>
         </div>
