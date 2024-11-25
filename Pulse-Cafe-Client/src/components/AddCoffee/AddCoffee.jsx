@@ -48,6 +48,7 @@ const AddCoffee = () => {
             icon: "error",
           });
         }
+        form.reset()
       });
   };
 

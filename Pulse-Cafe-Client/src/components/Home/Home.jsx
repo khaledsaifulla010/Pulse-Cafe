@@ -1,14 +1,14 @@
-import { Outlet } from "react-router-dom";
-import Navbar from "../Header/Navbar/Navbar";
-
+import { useLoaderData } from "react-router-dom";
 
 const Home = () => {
-    return (
-        <div className="px-20 mt-8">
-            <Navbar></Navbar>
-            <Outlet></Outlet>
-        </div>
-    );
+  const allCoffee = useLoaderData();
+  console.log(allCoffee);
+
+  return (
+    <div className=" mt-6 ml-4">
+      <h1>Coffee : {allCoffee.length} </h1>
+    </div>
+  );
 };
 
 export default Home;
