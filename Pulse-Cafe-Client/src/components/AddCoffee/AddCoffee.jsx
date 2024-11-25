@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 const AddCoffee = () => {
   const handleAddCoffee = (e) => {
     e.preventDefault();
@@ -20,6 +22,33 @@ const AddCoffee = () => {
       photo_url,
     };
     console.log(newCoffee);
+
+    // Send a new coffee in server //
+
+    fetch("http://localhost:5000/coffee", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newCoffee),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Good job!",
+            text: "Added A New Coffee!",
+            icon: "success",
+          });
+        } else {
+          Swal.fire({
+            title: "Opps",
+            text: "Something went wrong!",
+            icon: "error",
+          });
+        }
+      });
   };
 
   return (
