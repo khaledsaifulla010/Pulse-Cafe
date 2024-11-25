@@ -1,10 +1,35 @@
 const AddCoffee = () => {
+  const handleAddCoffee = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const name = form.name.value;
+    const supplier = form.supplier.value;
+    const category = form.category.value;
+    const chef = form.chef.value;
+    const taste = form.taste.value;
+    const details = form.details.value;
+    const photo_url = form.photo_url.value;
+    const newCoffee = {
+      name,
+      supplier,
+      category,
+      chef,
+      taste,
+      details,
+      photo_url,
+    };
+    console.log(newCoffee);
+  };
+
   return (
     <div>
-      <h1>AddCoffee</h1>
+      <div className="card bg-[#F4F3F0] w-[1200px] h-[600px] ml-24 mt-12 mb-12">
+        <h1 className="text-center font-black text-4xl mt-9">Add New Coffee</h1>
 
-      <div className="card bg-base-100 w-[1200px] ml-24 mt-12 border-2 mb-12">
-        <form className="card-body">
+        {/* FORM START */}
+
+        <form onSubmit={handleAddCoffee} className="card-body ">
           <div className="flex items-center justify-between font-bold ">
             <div>
               <div className="form-control">
@@ -15,7 +40,7 @@ const AddCoffee = () => {
                   type="text"
                   name="name"
                   placeholder="Enter Coffee Name"
-                  className="input input-bordered w-[500px]"
+                  className="input  w-[500px]"
                   required
                 />
               </div>
@@ -27,7 +52,7 @@ const AddCoffee = () => {
                   type="text"
                   name="supplier"
                   placeholder="Enter Coffee Supplier"
-                  className="input input-bordered w-[500px]"
+                  className="input  w-[500px]"
                   required
                 />
               </div>
@@ -39,7 +64,7 @@ const AddCoffee = () => {
                   type="text"
                   name="category"
                   placeholder="Enter Coffee Category"
-                  className="input input-bordered w-[500px]"
+                  className="input  w-[500px]"
                   required
                 />
               </div>
@@ -53,7 +78,7 @@ const AddCoffee = () => {
                   type="text"
                   name="chef"
                   placeholder="Enter Coffee Chef"
-                  className="input input-bordered w-[500px]"
+                  className="input  w-[500px]"
                   required
                 />
               </div>
@@ -65,7 +90,7 @@ const AddCoffee = () => {
                   type="text"
                   name="taste"
                   placeholder="Enter Coffee Taste"
-                  className="input input-bordered w-[500px]"
+                  className="input  w-[500px]"
                   required
                 />
               </div>
@@ -77,7 +102,7 @@ const AddCoffee = () => {
                   type="text"
                   name="details"
                   placeholder="Enter Coffee Details"
-                  className="input input-bordered w-[500px]"
+                  className="input  w-[500px]"
                   required
                 />
               </div>
@@ -89,16 +114,18 @@ const AddCoffee = () => {
             </label>
             <input
               type="url"
-              name="photo"
+              name="photo_url"
               placeholder="Enter Photo URL"
-              className="input input-bordered w-full"
+              className="input  w-full"
               required
             />
           </div>
           <div className="form-control mt-6">
-            <button className="border-2 p-2 rounded-xl w-full font-bold text-xl bg-[#D2B48C] text-[#331A15]">
-              Add Coffee
-            </button>
+            <input
+              className=" p-2 rounded-xl w-full font-bold text-xl bg-[#D2B48C] text-[#331A15]"
+              type="submit"
+              value="Add Coffee"
+            />
           </div>
         </form>
       </div>
