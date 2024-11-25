@@ -43,6 +43,14 @@ async function run() {
       res.send(result);
     });
 
+    //----------------------GET NEW COFFEE IN MONGODB--------------------------//
+
+    app.get("/coffee", async (req, res) => {
+      const cursor = coffeeCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(
