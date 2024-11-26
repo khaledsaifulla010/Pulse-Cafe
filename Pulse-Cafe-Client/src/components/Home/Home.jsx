@@ -7,7 +7,7 @@ const Home = () => {
 
   return (
     <div className=" mt-6 ml-4">
-      <h1>Coffee : {allCoffee.length} </h1>
+      {/* <h1>Coffee : {allCoffee.length} </h1> */}
 
       <div className="grid grid-cols-2 gap-y-12 mt-24 mb-24">
         {allCoffee.map((coffee) => (

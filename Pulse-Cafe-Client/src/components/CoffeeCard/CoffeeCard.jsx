@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const CoffeeCard = ({ coffee }) => {
@@ -8,7 +8,6 @@ const CoffeeCard = ({ coffee }) => {
   const redirect = useNavigate();
 
   const handleDelete = (_id) => {
-    // console.log(_id);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -62,9 +61,12 @@ const CoffeeCard = ({ coffee }) => {
           <button className="border-2 p-2 rounded-xl w-full bg-blue-200 font-bold text-blue-600 border-blue-300 text-lg">
             View
           </button>
-          <button className="border-2 p-2 rounded-xl w-full bg-orange-200 font-bold text-orange-600 border-orange-300 text-lg">
+          <Link
+            to={`/updateCoffee/${_id}`}
+            className="border-2 p-2 rounded-xl w-full bg-orange-200 font-bold text-orange-600 border-orange-300 text-lg text-center"
+          >
             Edit
-          </button>
+          </Link>
           <button
             onClick={() => handleDelete(_id)}
             className="border-2 p-2 rounded-xl w-full bg-red-200 font-bold text-red-600 border-red-300 text-lg"
