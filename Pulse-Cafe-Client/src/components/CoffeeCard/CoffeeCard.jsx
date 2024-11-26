@@ -1,11 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const CoffeeCard = ({ coffee }) => {
+const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
   const { _id, name, supplier, category, chef, taste, details, photo_url } =
     coffee;
-
-  const redirect = useNavigate();
 
   const handleDelete = (_id) => {
     Swal.fire({
@@ -26,12 +24,9 @@ const CoffeeCard = ({ coffee }) => {
             console.log(data);
 
             if (data.deletedCount > 0) {
-              Swal.fire({
-                title: "Deleted!",
-                text: "Coffee has been deleted.",
-                icon: "success",
-              });
-              redirect("/");
+              Swal.fire("Deleted!", "Coffee has been deleted.", "success");
+              const remainig = coffees.filter((cof) => cof._id !== _id);
+              setCoffees(remainig);
             }
           });
       }
