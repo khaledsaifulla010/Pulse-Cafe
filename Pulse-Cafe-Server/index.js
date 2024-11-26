@@ -51,12 +51,42 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/coffee/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await coffeeCollection.findOne(query);
+      res.send(result);
+    });
+
     //----------------------DELETE A COFFEE FROM MONGODB--------------------------//
 
     app.delete("/coffee/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await coffeeCollection.deleteOne(query);
+      res.send(result);
+    });
+
+    //----------------------UPDATE A COFFEE FROM MONGODB--------------------------//
+
+    app.put("/coffee/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updatedCoffee = req.body;
+      const coffee = {
+        $set: {
+          name: updatedCoffee.name,
+          supplier: updatedCoffee.supplier,
+          category: updatedCoffee.category,
+          chef: updatedCoffee.chef,
+          taste: updatedCoffee.taste,
+          details: updatedCoffee.details,
+          photo_url: updatedCoffee.photo_url,
+        },
+      };
+      const result = await coffeeCollection.updateOne(filter, coffee, options);
+
       res.send(result);
     });
 
