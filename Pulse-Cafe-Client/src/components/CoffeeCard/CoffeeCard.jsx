@@ -1,5 +1,44 @@
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
 const CoffeeCard = ({ coffee }) => {
-  const { name, supplier, category, chef, taste, details, photo_url } = coffee;
+  const { _id, name, supplier, category, chef, taste, details, photo_url } =
+    coffee;
+
+  const redirect = useNavigate();
+
+  const handleDelete = (_id) => {
+    // console.log(_id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/coffee/${_id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+
+            if (data.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Coffee has been deleted.",
+                icon: "success",
+              });
+              redirect("/");
+            }
+          });
+      }
+    });
+  };
+
   return (
     <div>
       <div className="card bg-base-100 w-[650px] h-[400px] border-2  ">
@@ -26,7 +65,10 @@ const CoffeeCard = ({ coffee }) => {
           <button className="border-2 p-2 rounded-xl w-full bg-orange-200 font-bold text-orange-600 border-orange-300 text-lg">
             Edit
           </button>
-          <button className="border-2 p-2 rounded-xl w-full bg-red-200 font-bold text-red-600 border-red-300 text-lg">
+          <button
+            onClick={() => handleDelete(_id)}
+            className="border-2 p-2 rounded-xl w-full bg-red-200 font-bold text-red-600 border-red-300 text-lg"
+          >
             X
           </button>
         </div>
